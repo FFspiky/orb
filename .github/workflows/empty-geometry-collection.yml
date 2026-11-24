@@ -15,7 +15,7 @@ jobs:
           - label: baseline
             ref: b85ffaf98ee23643f268efd131b4af2fc656f861
           - label: patched
-            ref: 3b7b836dbb612c87d0e4db9e8dbb997196d4b562
+            ref: 5ee007c039c0338219b3d63996dc8cadc0242d70
     steps:
       - uses: actions/checkout@v4
         with:
