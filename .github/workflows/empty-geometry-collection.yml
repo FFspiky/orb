@@ -1,0 +1,27 @@
+name: Empty collection Linux validation
+on:
+  push:
+    branches: [ci/empty-geometry-collection-linux]
+permissions:
+  contents: read
+jobs:
+  test:
+    name: ${{ matrix.label }} / Linux amd64
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: baseline
+            ref: b85ffaf98ee23643f268efd131b4af2fc656f861
+          - label: patched
+            ref: 3b7b836dbb612c87d0e4db9e8dbb997196d4b562
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ matrix.ref }}
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.5"
+      - run: go test -race -count=1 ./...
+      - run: go vet ./... && go build ./...
